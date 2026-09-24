@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">حقيبة التخاطب</string>
+    <string name="attribution_camera">استخدام الكاميرا للمرآة التفاعلية</string>
+    <string name="attribution_audio">استخدام الميكروفون لتسجيل النطق</string>
+</resources>
