@@ -42,9 +42,13 @@ fun RenderStaticExerciseImage(
     }
 
     val resourceId = remember(metadata?.imagePath) {
-        if (metadata != null && metadata.imagePath.isNotEmpty()) {
-            context.resources.getIdentifier(metadata.imagePath, "drawable", context.packageName)
-        } else {
+        try {
+            if (metadata != null && metadata.imagePath.isNotEmpty()) {
+                context.resources.getIdentifier(metadata.imagePath, "drawable", context.packageName)
+            } else {
+                0
+            }
+        } catch (e: Exception) {
             0
         }
     }
