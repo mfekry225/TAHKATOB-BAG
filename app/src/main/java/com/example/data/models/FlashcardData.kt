@@ -6,7 +6,9 @@ data class FlashcardItem(
     val category: String,
     val emoji: String,
     val articulationTip: String = "",
-    val companionEmoji: String = ""
+    val companionEmoji: String = "",
+    val imageResName: String? = null,
+    val imageUrl: String? = null
 )
 
 object FlashcardDatabase {
@@ -56,7 +58,7 @@ object FlashcardDatabase {
             Pair("فرس النهر", "Hippo"), Pair("تمساح", "Crocodile"), Pair("ثعبان", "Snake"), Pair("ضبع", "Hyena"),
             Pair("سنجاب", "Squirrel"), Pair("قنفذ", "Hedgehog"), Pair("كانغورو", "Kangaroo"), Pair("كوالا", "Koala")
         ), listOf(
-            "🦁", "🐯", "🐆", "🐺", "🦊", "🐻", "🐒", "🦌", "🦒", "🐘", "🦓", "🦏", "🦛", "🐊", "🐍", "🐺", "🐿️", "🦔", "🦘", "🐨"
+            "🦁", "🐯", "🐆", "🐺", "🦊", "🐻", "🐒", "🦌", "🦒", "🐘", "ZEBRA", "🦏", "🦛", "🐊", "🐍", "🐺", "🐿️", "🦔", "🦘", "🐨"
         ))
 
         // Category 3: الفواكه
@@ -276,13 +278,16 @@ object FlashcardDatabase {
             val ar = namePairs[i].first
             val en = namePairs[i].second
             val emo = if (i < emojis.size) emojis[i] else "⭐"
+            val sanitizedEng = en.lowercase().replace(" ", "_").replace("-", "_")
+            val resName = "img_$sanitizedEng"
             allGeneratedItems.add(
                 FlashcardItem(
                     arabicName = ar,
                     englishName = en,
                     category = catName,
                     emoji = emo,
-                    articulationTip = "احرص على نطق حرف (${ar.take(1)}) بوضوح تام، بطيء ونبرة مريحة للطفل."
+                    articulationTip = "احرص على نطق حرف (${ar.take(1)}) بوضوح تام، بطيء ونبرة مريحة للطفل.",
+                    imageResName = resName
                 )
             )
         }
